@@ -27,3 +27,13 @@ trans_ent =
     ada) %>% 
   mutate(entry = ifelse(entry == "YES", TRUE, FALSE))
 ```
+
+As it stands, these data are not "tidy": route number should be a variable, as should route. That is, to obtain a tidy dataset we would need to convert `route` variables from wide to long format. This will be useful when focusing on specific routes, but may not be necessary when considering questions that focus on station-level variables. 
+
+The following code chunk selects station name and line, and then uses `distinct()` to obtain all unique combinations. As a result, the number of rows in this dataset is the number of unique stations.
+
+```{r}
+trans_ent %>% 
+  select(station_name, line) %>% 
+  distinct
+```
