@@ -1,0 +1,15 @@
+---
+title: "p8105_hw2_jc5313"
+output: github_document
+date: "2022-10-05"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load_libraries}
+library(tidyverse)
+library(readxl)
+```
+
