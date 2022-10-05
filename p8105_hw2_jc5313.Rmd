@@ -37,3 +37,12 @@ trans_ent %>%
   select(station_name, line) %>% 
   distinct
 ```
+
+The next code chunk is similar, but filters according to ADA compliance as an initial step. This produces a dataframe in which the number of rows is the number of ADA compliant stations. 
+
+```{r}
+trans_ent %>% 
+  filter(ada == TRUE) %>% 
+  select(station_name, line) %>% 
+  distinct
+```
