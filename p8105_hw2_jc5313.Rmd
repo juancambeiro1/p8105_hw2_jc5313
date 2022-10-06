@@ -102,3 +102,4 @@ Next, I am producing a single tidy dataset.
 trash_wheel_data = full_join(mr_trash_wheel_data, professor_trash_wheel_data)
 ```
 
+My new single tidy dataset has `r nrow(trash_wheel_data)` observations with the variables `r colnames(trash_wheel_data)`. A key variable is the `weight_tons` variable, and the total weight of trash collected by Professor Trash Wheel was `r sum(pull(professor_trash_wheel_data, weight_tons))`. Another key variable is the `sports_balls` variable, and the total number of sports balls collected by Mr. Trash Wheel in 2020 was `r filter(mr_trash_wheel_data, year == 2020) %>% {sum(.$sports_balls)}` 
