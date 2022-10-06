@@ -146,4 +146,10 @@ unemployment_data = read_csv("data/fivethirtyeight_datasets/unemployment.csv") %
          month = str_to_lower(month))
 ```
 
+Now I join the datasets by merging snp_data into pols_data, and merging unemployment_data into the result.
+```{r}
+merged_snp_pols = left_join(pols_data, snp_data, by = c("year" = "year", "month" = "month"))
+merged_snp_pols_unemployment = left_join(merged_snp_pols, unemployment_data,  by = c("year" = "year", "month" = "month"))
+```
 
+The pols dataset has `r nrow(pols_data)` rows and `r ncol(pols_data)` columns. The snp dataset has `r nrow(snp_data)` rows and `r ncol(snp_data)` columns. The unemployment dataset has `r nrow(unemployment_data)` rows and `r ncol(unemployment_data)` columns. The final dataset has `r nrow(merged_snp_pols_unemployment)` rows and `r ncol(merged_snp_pols_unemployment)` columns and has variables `r colnames(merged_snp_pols_unemployment)`. The year range is `r min(pull(merged_snp_pols_unemployment, year))` to `r max(pull(merged_snp_pols_unemployment, year))`.
