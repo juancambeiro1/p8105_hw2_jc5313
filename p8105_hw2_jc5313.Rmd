@@ -96,3 +96,9 @@ professor_trash_wheel_data = read_excel("data/Trash Wheel Collection Data.xlsx",
   janitor::clean_names() %>%
   drop_na(dumpster) 
 ```
+
+Next, I am producing a single tidy dataset.
+```{r}
+trash_wheel_data = full_join(mr_trash_wheel_data, professor_trash_wheel_data)
+```
+
