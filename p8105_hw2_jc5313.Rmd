@@ -97,7 +97,7 @@ professor_trash_wheel_data = read_excel("data/Trash Wheel Collection Data.xlsx",
   drop_na(dumpster) 
 ```
 
-Next, I am producing a single tidy dataset.
+Next, I am producing a single tidy dataset using `full.join`.
 ```{r}
 trash_wheel_data = full_join(mr_trash_wheel_data, professor_trash_wheel_data)
 ```
@@ -107,7 +107,7 @@ My new single tidy dataset has `r nrow(trash_wheel_data)` observations with the 
 
 ## Problem 3
 
-First, I clean the data in pols-month.csv.
+First, I clean the data in pols-month.csv and save it as pols_data.
 ```{r}
 pols_data = read_csv("data/fivethirtyeight_datasets/pols-month.csv") %>%
   janitor::clean_names() %>%
@@ -123,7 +123,7 @@ pols_data = read_csv("data/fivethirtyeight_datasets/pols-month.csv") %>%
   select(-prez_gop, -prez_dem)
 ```
 
-Second, I clean the data in snp.csv in a very similar way to what I did for pols-month.csv.
+Second, I clean the data in snp.csv in a very similar way to what I did for pols-month.csv. I will save it as snp_data.
 ```{r}
 snp_data = read_csv("data/fivethirtyeight_datasets/snp.csv") %>%
   janitor::clean_names() %>%
@@ -136,7 +136,7 @@ snp_data = read_csv("data/fivethirtyeight_datasets/snp.csv") %>%
   arrange(year, month)
 ```
 
-Third, I tidy the unemployment data so that it can be merged with the previous two datasets.
+Third, I tidy the unemployment data so that it can be merged with the previous two datasets. I use `pivot_longer` to switch from the wide to the long format.
 ```{r}
 unemployment_data = read_csv("data/fivethirtyeight_datasets/unemployment.csv") %>%
   janitor::clean_names() %>%
@@ -146,7 +146,7 @@ unemployment_data = read_csv("data/fivethirtyeight_datasets/unemployment.csv") %
          month = str_to_lower(month))
 ```
 
-Now I join the datasets by merging snp_data into pols_data, and merging unemployment_data into the result.
+Now I join the datasets by merging snp_data into pols_data, and then subsequently merging unemployment_data into the result. 
 ```{r}
 merged_snp_pols = left_join(pols_data, snp_data, by = c("year" = "year", "month" = "month"))
 merged_snp_pols_unemployment = left_join(merged_snp_pols, unemployment_data,  by = c("year" = "year", "month" = "month"))
