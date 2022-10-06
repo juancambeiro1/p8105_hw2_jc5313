@@ -135,7 +135,15 @@ snp_data = read_csv("data/fivethirtyeight_datasets/snp.csv") %>%
          year = as.numeric(year), year = 2000+year) %>%
   arrange(year, month)
 ```
+
+Third, I tidy the unemployment data so that it can be merged with the previous two datasets.
 ```{r}
-view(snp_data)
+unemployment_data = read_csv("data/fivethirtyeight_datasets/unemployment.csv") %>%
+  janitor::clean_names() %>%
+  pivot_longer(jan:dec, names_to = "month", values_to = "percent_unemployed") %>%
+  mutate(month = as.numeric(month),
+         month = month.abb[month],
+         month = str_to_lower(month))
 ```
+
 
