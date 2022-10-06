@@ -89,3 +89,10 @@ mr_trash_wheel_data = read_excel("data/Trash Wheel Collection Data.xlsx", sheet 
   drop_na(dumpster) %>%
   mutate(year = as.numeric(year), sports_balls = as.integer(sports_balls))
 ```
+
+Next, I am reading and cleaning the Professor Trash Wheel sheet.
+```{r}
+professor_trash_wheel_data = read_excel("data/Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", range = "A2:M96") %>%
+  janitor::clean_names() %>%
+  drop_na(dumpster) 
+```
